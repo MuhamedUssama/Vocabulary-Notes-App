@@ -1,4 +1,4 @@
-abstract class WordModel {
+class WordModel {
   final int indexAtDatabase;
   final String text;
   final bool isArabic;

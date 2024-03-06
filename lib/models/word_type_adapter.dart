@@ -4,16 +4,30 @@ import 'package:vocabulary_notes_app/models/word_model.dart';
 class WordTypeAdapter extends TypeAdapter<WordModel> {
   @override
   WordModel read(BinaryReader reader) {
-    // TODO: implement read
-    throw UnimplementedError();
+    return WordModel(
+      indexAtDatabase: reader.readInt(),
+      text: reader.readString(),
+      isArabic: reader.readBool(),
+      colorCode: reader.readInt(),
+      arabicSimilarWords: reader.readStringList(),
+      englishSimilarWords: reader.readStringList(),
+      arabicExamples: reader.readStringList(),
+      englishExamples: reader.readStringList(),
+    );
   }
 
   @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
+  int get typeId => 0;
 
   @override
   void write(BinaryWriter writer, WordModel obj) {
-    // TODO: implement write
+    writer.writeInt(obj.indexAtDatabase);
+    writer.writeString(obj.text);
+    writer.writeBool(obj.isArabic);
+    writer.writeInt(obj.colorCode);
+    writer.writeStringList(obj.arabicSimilarWords);
+    writer.writeStringList(obj.englishSimilarWords);
+    writer.writeStringList(obj.arabicExamples);
+    writer.writeStringList(obj.englishExamples);
   }
 }
