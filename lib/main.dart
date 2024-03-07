@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'constants/hive_constant.dart';
 import 'models/word_type_adapter.dart';
 import 'view/screens/home_screen.dart';
 
@@ -7,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(WordTypeAdapter());
+  await Hive.openBox(HiveContants.wordBox);
   runApp(const VocabularyApp());
 }
 
