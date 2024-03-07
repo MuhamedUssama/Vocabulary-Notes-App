@@ -21,12 +21,40 @@ class WordModel {
 
   WordModel addSimilarWord(String similarWord, bool isArabicSimilarWord) {
     List<String> newSimilarWords = [];
+
     if (isArabicSimilarWord) {
       newSimilarWords = List.from(arabicSimilarWords);
     } else {
       newSimilarWords = List.from(englishSimilarWords);
     }
+
     newSimilarWords.add(similarWord);
+
+    return WordModel(
+      indexAtDatabase: indexAtDatabase,
+      text: text,
+      isArabic: isArabic,
+      colorCode: colorCode,
+      arabicSimilarWords:
+          isArabicSimilarWord ? newSimilarWords : arabicSimilarWords,
+      englishSimilarWords:
+          isArabicSimilarWord ? englishSimilarWords : newSimilarWords,
+      arabicExamples: arabicExamples,
+      englishExamples: englishExamples,
+    );
+  }
+
+  WordModel deleteSimilarWord(
+      int indexOfSimilarWord, bool isArabicSimilarWord) {
+    List<String> newSimilarWords = [];
+
+    if (isArabicSimilarWord) {
+      newSimilarWords = List.from(arabicSimilarWords);
+    } else {
+      newSimilarWords = List.from(englishSimilarWords);
+    }
+
+    newSimilarWords.removeAt(indexOfSimilarWord);
 
     return WordModel(
       indexAtDatabase: indexAtDatabase,
