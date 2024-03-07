@@ -19,6 +19,19 @@ class WordModel {
     this.englishExamples = const [],
   });
 
+  WordModel decrementIndexAtDataBase() {
+    return WordModel(
+      indexAtDatabase: indexAtDatabase - 1,
+      text: text,
+      isArabic: isArabic,
+      colorCode: colorCode,
+      arabicSimilarWords: arabicSimilarWords,
+      englishSimilarWords: englishSimilarWords,
+      arabicExamples: arabicExamples,
+      englishExamples: englishExamples,
+    );
+  }
+
   WordModel addExapmle(bool isArabicExapmle, String example) {
     List<String> newExamples = _checkIfArabicExampleOrNot(isArabicExapmle);
 
