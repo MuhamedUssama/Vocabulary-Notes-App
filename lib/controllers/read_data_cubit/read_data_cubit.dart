@@ -33,6 +33,8 @@ class ReadDataCubit extends Cubit<ReadDataCubitStates> {
           List.from(_box.get(HiveContants.wordList, defaultValue: []))
               .cast<WordModel>();
       _removeUnwantedWords(wordToReturn);
+      _applySortingBy(wordToReturn);
+      emit(ReadDataCubitSuccessState(words: wordToReturn));
     } catch (error) {
       emit(ReadDataCubitFailedState(
           message: "We have an issue, please try again"));
@@ -62,7 +64,16 @@ class ReadDataCubit extends Cubit<ReadDataCubitStates> {
       } else {
         _reverse(wordToReturn);
       }
-    } else {}
+    } else {
+      wordToReturn.sort(
+          (WordModel a, WordModel b) => a.text.length.compareTo(b.text.length));
+
+      if (sortingType == SortingType.ascending) {
+        return;
+      } else {
+        _reverse(wordToReturn);
+      }
+    }
   }
 
   void _reverse(List<WordModel> wordToReturn) {
